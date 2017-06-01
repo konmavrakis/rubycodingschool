@@ -1,4 +1,4 @@
 class ProductList < ApplicationRecord
-  belongs_to:products
+  has_many:products
   belongs_to:lists
 end
