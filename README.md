@@ -1,4 +1,4 @@
-#Skroutz Project 
+# Skroutz Project 
 A simple Ruby on Rails application using the Skroutz API in order to retrieve products and create lists from users. 
 
 ## Requirements
