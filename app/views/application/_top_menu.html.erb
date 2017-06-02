@@ -1,0 +1,40 @@
+ 
+ <%= link_to image_tag("//c.scdn.gr/assets/schwartz/el/logo-el-large-28021127f2a44d590e5fcff61252b55f.png", class:"img-responsive center-block") , root_path %>
+ <br />
+ <div class="row">
+    <div class="col-xs-12">
+ <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">SkroutzApp: <b>Fav Magic</b></a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav pull-right">
+              <% if user_signed_in? %>
+                <li>
+                <%= link_to('Edit registration', edit_user_registration_path) %>
+                </li>
+                <li>
+                <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>        
+                </li>
+              <% else %>
+                <li>
+                <%= link_to('Login', new_user_session_path)  %>  
+                </li>
+                <li>
+                <%= link_to('Register', new_user_registration_path)  %>
+                </li>
+              <% end %>
+            </ul>
+           
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
+</div>
+</div>
