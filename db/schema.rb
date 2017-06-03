@@ -18,19 +18,17 @@ ActiveRecord::Schema.define(version: 20170602210147) do
     t.decimal  "total_price", precision: 10
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
-    t.integer  "users_id"
-    t.index ["users_id"], name: "index_lists_on_users_id", using: :btree
+    t.integer  "user_id"
+    t.index ["user_id"], name: "index_lists_on_user_id", using: :btree
   end
 
   create_table "product_lists", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "list_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer  "product_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "products_id"
-    t.integer  "lists_id"
-    t.index ["lists_id"], name: "index_product_lists_on_lists_id", using: :btree
-    t.index ["products_id"], name: "index_product_lists_on_products_id", using: :btree
+    t.integer  "list_id"
+    t.index ["list_id"], name: "index_product_lists_on_list_id", using: :btree
+    t.index ["product_id"], name: "index_product_lists_on_product_id", using: :btree
   end
 
   create_table "products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -60,7 +58,7 @@ ActiveRecord::Schema.define(version: 20170602210147) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  add_foreign_key "lists", "users", column: "users_id"
-  add_foreign_key "product_lists", "lists", column: "lists_id"
-  add_foreign_key "product_lists", "products", column: "products_id"
+  add_foreign_key "lists", "users"
+  add_foreign_key "product_lists", "lists"
+  add_foreign_key "product_lists", "products"
 end
