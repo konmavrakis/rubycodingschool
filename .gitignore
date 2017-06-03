@@ -189,4 +189,5 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+config/database.yml
 # End of https://www.gitignore.io/api/vim,ruby,macos,linux,rails,windows
