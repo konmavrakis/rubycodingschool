@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-  attr_accessor :name
   # Associations
   # ===========
   
@@ -21,17 +20,30 @@ class User < ApplicationRecord
 
   # name and email should be unique
   validates :email, uniqueness: true, confirmation: true
-  # name should be bigger than 4 chars
+  validates :email_confirmation, presence: true
 
-  # # # Commented Out , Need to check with the PROs 
-  # validates :name, length: { 
-  #   within: 4..50,
-  #   wrong_length: 'Invalid length', 
-  #   too_long: "%{count} characters is the maximum allowed", 
-  #   too_short: "must have at least %{count} characters"  
-  # }
 
   # name and email should be unique
-  validates :name, uniqueness: { scope: :email,  message: 'there can be only one!'} 
+  validates :name, presence: true,  uniqueness: { scope: :email,  message: 'there can be only one!'} 
   
+  # name should be bigger than 4 chars
+  validates :name, length: { 
+    within: 4..50,
+    wrong_length: 'Invalid length', 
+    too_long: "%{count} characters is the maximum allowed", 
+    too_short: "must have at least %{count} characters"  
+  }
+
+  # Custom validation for unique user name 
+  validate :validate_username
+
+  private 
+
+  def validate_username
+    if User.where(name: name).exists?
+      errors.add(:name, 'User name has already been taken')
+    end
+  end
+  
+ 
 end
