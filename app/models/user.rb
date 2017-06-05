@@ -23,7 +23,7 @@ class User < ApplicationRecord
 
 
   # name and email should be unique
-  validates :name, presence: true,  uniqueness: { scope: :email,  message: 'there can be only one!'} 
+  validates :name, presence: true
   
   # name should be bigger than 4 chars
   validates :name, length: { 
