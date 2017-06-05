@@ -1,7 +1,6 @@
 class User < ApplicationRecord
   # Associations
   # ===========
-  
   has_many :lists
  
 
@@ -23,7 +22,7 @@ class User < ApplicationRecord
 
 
   # name and email should be unique
-  validates :name, presence: true
+  validates :name, uniqueness: true, presence: true
   
   # name should be bigger than 4 chars
   validates :name, length: { 
@@ -32,17 +31,5 @@ class User < ApplicationRecord
     too_long: "%{count} characters is the maximum allowed", 
     too_short: "must have at least %{count} characters"  
   }
-
-  # Custom validation for unique user name 
-  validate :validate_username
-
-  private 
-
-  def validate_username
-    if User.where(name: name).exists?
-      errors.add(:name, 'User name has already been taken')
-    end
-  end
-  
  
 end
