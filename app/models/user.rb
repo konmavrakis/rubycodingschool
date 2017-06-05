@@ -19,8 +19,7 @@ class User < ApplicationRecord
   # ===========
 
   # name and email should be unique
-  validates :email, uniqueness: true, confirmation: true
-  validates :email_confirmation, presence: true
+  validates :email, uniqueness: true
 
 
   # name and email should be unique
