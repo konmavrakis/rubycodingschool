@@ -1,0 +1,11 @@
+<h2>Search for a skroutz product</h2>
+
+<div class="search-form">
+  <%= form_tag action: "preview", method: "post" do %>
+    <%= text_field_tag :q, params[:q], placeholder: "Search Product" %> 
+    <%= submit_tag "Search" %>
+  <% end %>
+</div>
+
+
+
