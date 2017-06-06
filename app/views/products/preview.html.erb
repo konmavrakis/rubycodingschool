@@ -1,2 +1,17 @@
-<h1>Products#preview</h1>
-<p>Find me in app/views/products/preview.html.erb</p>
+
+<h1><%= @sku.name %></h1>
+<img src="<%= @sku.images['main'] %>" alt="<%= @sku.name %>">
+<p class="price">Από <%= @sku.price_min %> έως <%= @sku.price_max %></p>
+
+<div class="panel-group">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" href="#collapse">Show JSON</a>
+      </h4>
+    </div>
+    <div id="collapse" class="panel-collapse collapse">
+      <div class="panel-body"><pre style="max-width:100%;height:100%;white-space:normal;"><%= @sku.to_json %></pre></div>
+    </div>
+  </div>
+</div>

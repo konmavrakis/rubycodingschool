@@ -18,6 +18,9 @@
             <ul class="nav navbar-nav pull-right">
               <% if user_signed_in? %>
                 <li>
+                <%= link_to('Search SKU',
+                'products/search') %>
+                <li>
                 <%= link_to('Edit registration', edit_user_registration_path) %>
                 </li>
                 <li>
