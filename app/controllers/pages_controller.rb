@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
+  include SkroutzApi
   def home
-   #debugger 
   end
 end

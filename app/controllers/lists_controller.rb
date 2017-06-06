@@ -2,10 +2,12 @@ class ListsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_list, only: [:show, :edit, :update, :destroy]
   
+  include SkroutzApi
 
   # GET /lists
   # GET /lists.json
   def index
+    @result = SkroutzApi.find_sku(8864706)
     @lists = List.all
   end
 
