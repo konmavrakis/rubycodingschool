@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  before_action :authenticate_user!
   include SkroutzApi
 
   def search
@@ -10,7 +11,12 @@ class ProductsController < ApplicationController
   def preview
     sku_id = params[:q]
     @sku = SkroutzApi.find_sku(sku_id)
-    @name = @sku[0]['name']
     #debugger
+  end
+
+  private
+
+  def product_params
+    params.require(:product).permit(:q)
   end
 end
