@@ -10,12 +10,7 @@
 
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email_confirmation %><br />
-    <%= f.email_field :email_confirmation, autocomplete: "off" %>
+    <%= f.email_field :email, autofocus: true %>
   </div>
 
   <div class="field">
