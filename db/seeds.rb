@@ -53,7 +53,7 @@ skus_id.each {|key, value| Product.create(skroutz_id: value, name: "product No#{
 # Create Users
 users.each do |key, value|
   name = value
-  User.create(name: name, email: "#{name}@mail.com", password: "password").errors
+  User.create(name: name, email: "#{name}@mail.com", password: "password")
 end
 
 # Create Lists
