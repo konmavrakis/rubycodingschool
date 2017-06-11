@@ -48,7 +48,7 @@ users = {
 }
 
 # Create Products
-skus_id.each {|key, value| Product.create(skroutz_id: value, name: "product No#{key}") }
+skus_id.each {|key, value| Product.create(skroutz_id: value) }
 
 # Create Users
 users.each do |key, value|
