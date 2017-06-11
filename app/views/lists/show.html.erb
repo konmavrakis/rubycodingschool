@@ -12,16 +12,20 @@
 
 <p>
   <strong>Total price:</strong>
-  <%= @list.total_price %>
+  <%= @total_price %>
 </p>
 
 <p>
   <strong>Products:</strong>
   <table>
     <tbody>
-    <% @products.each do |product| %>
+    <% @sku.each do |sku| %>
       <tr>
-        <td><%= product.skroutz_id %></td>
+        <td>
+          <img src="<%= sku.images['main'] %>" width = "30%" height = "30%" alt="<%= sku.name %>">
+        </td>
+        <td><%= sku.id %></td>
+        <td><%= sku.name %></td>
       </tr>
     <% end %>
   </tbody>

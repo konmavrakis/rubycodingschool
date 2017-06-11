@@ -2,24 +2,26 @@ class ListsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_list, only: [:show, :edit, :update, :destroy]
 
-  #include SkroutzApi
+  include SkroutzApi
 
   # GET /lists
   # GET /lists.json
   def index
-    @lists = List.all
+    @lists = List.where(user_id: current_user.id)
   end
 
   # GET /lists/1
   # GET /lists/1.json
   def show
+    @total_price = 0
     @products = @list.products
-    @sku= Hash.new { |hash, key| hash[key] = 12  }
-    #@products.each do |product|
-    #  sku_id = product.skroutz_id
-    #  @sku[:sku_id] = SkroutzApi.find_sku(sku_id)
-    #end
-    #debugger
+    @sku= Array.new
+    @products.each do |product|
+      sku_id = product.skroutz_id
+      temp_sku = SkroutzApi.find_sku(sku_id)
+      @sku.push(temp_sku)
+      @total_price = @total_price + temp_sku.price_min
+    end
   end
 
   # GET /lists/new
