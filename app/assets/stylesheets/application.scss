@@ -1,3 +1,14 @@
 // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+.input-group-btn input {
+  color: white !important;
+	background: #e8760a !important;
+  border: 1px solid #e8760a !important;
+  border-left: none !important;
+}
+
+input#sku-search, input.btn.btn-default {
+  height: 50px !important;
+}
