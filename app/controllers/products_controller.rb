@@ -11,24 +11,18 @@ class ProductsController < ApplicationController
   def add_product_to_list
     # product_lists
     sku_id    = params[:sku_id]
-    product = Product.where('skroutz_id=?', sku_id); 
+    product = Product.where('skroutz_id=?', sku_id)
+    list = List.find(params[:list])
 
     if product.empty? 
-      product = Product.new
-      product.skroutz_id = sku_id
-      product.save()
-    end 
+      product = Product.create(skroutz_id: sku_id)
+    end   
 
-    list_id   = params[:list]
+    unless List.first(params[:id]).products.include?(product)
+      list.products << product
+    end
 
-    # check for existing product 
-    product_list = ProductList.new()
-
-
-
-    # debugger
     render html: 'test'
-
   end
   
 
