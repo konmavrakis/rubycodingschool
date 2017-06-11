@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   #post 'products/preview', to: redirect('/products/preview/#{sku}')
   get 'products/preview/:sku', to: 'products#preview'
 
+  post 'products/addtolist', to: 'products#add_product_to_list'
 
   devise_for :users
   resources :lists
