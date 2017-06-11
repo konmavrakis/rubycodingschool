@@ -1,7 +1,8 @@
 class ListsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_list, only: [:show, :edit, :update, :destroy]
-  
+
+  #include SkroutzApi
 
   # GET /lists
   # GET /lists.json
@@ -12,6 +13,13 @@ class ListsController < ApplicationController
   # GET /lists/1
   # GET /lists/1.json
   def show
+    @products = @list.products
+    @sku= Hash.new { |hash, key| hash[key] = 12  }
+    #@products.each do |product|
+    #  sku_id = product.skroutz_id
+    #  @sku[:sku_id] = SkroutzApi.find_sku(sku_id)
+    #end
+    #debugger
   end
 
   # GET /lists/new

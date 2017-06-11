@@ -15,5 +15,17 @@
   <%= @list.total_price %>
 </p>
 
+<p>
+  <strong>Products:</strong>
+  <table>
+    <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= product.skroutz_id %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  </table>
+
 <%= link_to 'Edit', edit_list_path(@list) %> |
 <%= link_to 'Back', lists_path %>
