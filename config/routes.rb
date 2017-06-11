@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   get 'products/search'
   get 'products/show'
-  post 'products/preview'
+  get 'products/preview'
+  
+  #post 'products/preview', to: redirect('/products/preview/#{sku}')
+  get 'products/preview/:sku', to: 'products#preview'
+
 
   devise_for :users
   resources :lists

@@ -1,11 +1,8 @@
 <h2>Search for a skroutz product by SKU</h2>
 
 <div class="search-form">
-  <%= form_tag action: "preview", method: "post" do %>
-    <%= text_field_tag :q, params[:q], placeholder: "Enter SKU" %> 
+  <%= form_tag ('preview'), :method => :get do %> 
+    <%= text_field_tag :sku, params[:sku], placeholder: "Enter SKU" %> 
     <%= submit_tag "Get Product" %>
   <% end %>
 </div>
-
-
-
