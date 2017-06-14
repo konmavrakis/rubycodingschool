@@ -73,6 +73,15 @@ class ListsController < ApplicationController
     end
   end
 
+  def RemoveProduct
+    id_to_delete = params[:sku_id]
+    #list = params[:list]
+    active_list = List.find(params[:list_id])
+    debugger
+    active_list.products.delete(active_list.products.find_by(skroutz_id: id_to_delete).id)
+    redirect_to action: "show", id: active_list,  flash: {notice: "Product successfully removed"}
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_list
