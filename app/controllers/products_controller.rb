@@ -26,13 +26,15 @@ class ProductsController < ApplicationController
     unless list.products.include?(product)
       # add to list 
       list.products << product
-
-      redirect_to( products_preview_path(sku: sku_id) , alert: 'WOW! You just added a produt to ' + list.name + ' list!'  )
- 
+    
+      # sku = SkroutzApi.find_sku(sku_id)
+      # να φέρω τη μαμά του; τον μπαμπά του; τον Άγ. Γεράσιμο;  ;;
+      redirect_to( list , notice: 'WOW! You just added ' + sku_id  + '  to ' + list.name + ' list!'  )
+  
     else
 
       # send error message  
-      redirect_to(products_preview_path(sku: sku_id), alert: 'SKU is already in the list' ) 
+      redirect_to( products_preview_path(sku: sku_id), alert: 'SKU is already in the list' ) 
 
     end
 
