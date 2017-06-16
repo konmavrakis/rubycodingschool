@@ -10,19 +10,32 @@ class ProductsController < ApplicationController
 
   def add_product_to_list
     # product_lists
-    sku_id    = params[:sku_id]
-    product = Product.where('skroutz_id=?', sku_id)
-    list = List.find(params[:list])
 
-    if product.empty? 
+    sku_id    = params[:sku_id]
+    product   = Product.where('skroutz_id=?', sku_id).first
+
+    # check if product exists
+    if product.nil? 
       product = Product.create(skroutz_id: sku_id)
     end   
 
-    unless List.first(params[:id]).products.include?(product)
+    # get list
+    list  = List.find(params[:list])
+
+    # check product in list 
+    unless list.products.include?(product)
+      # add to list 
       list.products << product
+
+      redirect_to( products_preview_path(sku: sku_id) , alert: 'WOW! You just added a produt to ' + list.name + ' list!'  )
+ 
+    else
+
+      # send error message  
+      redirect_to(products_preview_path(sku: sku_id), alert: 'SKU is already in the list' ) 
+
     end
 
-    render html: 'test'
   end
   
 
