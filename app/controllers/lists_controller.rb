@@ -36,7 +36,7 @@ class ListsController < ApplicationController
   # POST /lists
   # POST /lists.json
   def create
-    @list = List.new(list_params)
+    @list = List.new(name: list_params["name"], active: list_params["active"], user_id: current_user.id)
 
     respond_to do |format|
       if @list.save
