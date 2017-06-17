@@ -3,6 +3,19 @@
 <img src="<%= @sku.images['main'] %>" alt="<%= @sku.name %>">
 <p class="price">Από <%= @sku.price_min %> έως <%= @sku.price_max %></p>
 
+<div class="add-to-list-form">
+  <%= form_tag ('/products/addtolist'), :method => :post do %> 
+    <%= hidden_field_tag "sku_id" , @sku.id %> 
+    <%= select_tag "list", options_from_collection_for_select(@lists, "id", "name") %>
+
+    <%= submit_tag "Add to List" %>
+  <% end %>
+</div>
+<br />
+
+<br />
+<div class="clearfix" > </div>
+
 <div class="panel-group">
   <div class="panel panel-default">
     <div class="panel-heading">

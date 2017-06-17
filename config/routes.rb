@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'products/preview/:sku', to: 'products#preview'
   put 'list/removeproduct', to: 'lists#RemoveProduct'
 
+  post 'products/addtolist', to: 'products#add_product_to_list'
 
   devise_for :users
   root 'pages#home'
