@@ -1,16 +1,27 @@
 class ListsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_list, only: [:show, :edit, :update, :destroy]
-  
+
+  include SkroutzApi
+
   # GET /lists
   # GET /lists.json
   def index
-    @lists = List.all
+    @lists = List.where(user_id: current_user.id)
   end
 
   # GET /lists/1
   # GET /lists/1.json
   def show
+    @total_price = 0
+    @products = @list.products
+    @sku= Array.new
+    @products.each do |product|
+      sku_id = product.skroutz_id
+      temp_sku = SkroutzApi.find_sku(sku_id)
+      @sku.push(temp_sku)
+      @total_price = @total_price + temp_sku.price_min
+    end
   end
 
   # GET /lists/new
@@ -25,7 +36,7 @@ class ListsController < ApplicationController
   # POST /lists
   # POST /lists.json
   def create
-    @list = List.new(list_params)
+    @list = List.new(name: list_params["name"], active: list_params["active"], user_id: current_user.id)
 
     respond_to do |format|
       if @list.save
@@ -60,6 +71,15 @@ class ListsController < ApplicationController
       format.html { redirect_to lists_url, notice: 'List was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def RemoveProduct
+    id_to_delete = params[:sku_id]
+    #list = params[:list]
+    active_list = List.find(params[:list_id])
+    debugger
+    active_list.products.delete(active_list.products.find_by(skroutz_id: id_to_delete).id)
+    redirect_to action: "show", id: active_list,  flash: {notice: "Product successfully removed"}
   end
 
   private

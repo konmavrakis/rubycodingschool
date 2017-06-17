@@ -10,6 +10,28 @@
   <%= @list.active %>
 </p>
 
+<p>
+  <strong>Total price:</strong>
+  <%= @total_price %>
+</p>
+
+<p>
+  <strong>Products:</strong>
+  <table>
+    <tbody>
+    <% @sku.each do |sku| %>
+      <tr>
+        <td>
+          <img src="<%= sku.images['main'] %>" width = "30%" height = "30%" alt="<%= sku.name %>">
+        </td>
+        <td><%= sku.id %></td>
+        <td><%= sku.name %></td>
+        <td><%= link_to 'Remove', list_removeproduct_path(:sku_id=>sku.id, :list_id=>@list.id), method: :put %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  </table>
 
 <%= link_to 'Edit', edit_list_path(@list) %> |
 <%= link_to 'Back', lists_path %>
+<p id="notice"><%= notice %></p>
