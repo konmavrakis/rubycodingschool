@@ -1,3 +1,22 @@
 // Place all the styles related to the products controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+ .input-group .form-control {
+  border: 1px solid #e8760a !important;
+  border-right: none !important;
+}
+
+.input-group-btn input {
+  color: white !important;
+	background: #e8760a !important;
+  border: 1px solid #e8760a !important;
+  border-left: none !important;
+}
+
+.jumbotron {
+  height: 250px !important;
+}
+
+input#sku-search, input.btn.btn-default {
+  height: 50px !important;
+}
