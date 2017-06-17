@@ -10,14 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170602210147) do
+ActiveRecord::Schema.define(version: 20170611095516) do
 
   create_table "lists", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.boolean  "active"
-    t.decimal  "total_price", precision: 10
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer  "user_id"
     t.index ["user_id"], name: "index_lists_on_user_id", using: :btree
   end
@@ -33,11 +32,8 @@ ActiveRecord::Schema.define(version: 20170602210147) do
 
   create_table "products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "skroutz_id"
-    t.string   "name"
-    t.string   "category"
-    t.decimal  "price",      precision: 10
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

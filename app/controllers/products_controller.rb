@@ -11,5 +11,7 @@ class ProductsController < ApplicationController
   def preview
     sku_id = params[:sku]
     @sku = SkroutzApi.find_sku(sku_id)
+    rescue Skroutz::ResourceNotFound
+      redirect_to(products_search_path, alert: "SKU not found.")
   end
 end
