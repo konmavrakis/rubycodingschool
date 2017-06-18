@@ -12,3 +12,28 @@
 input#sku-search, input.btn.btn-default {
   height: 50px !important;
 }
+
+.thumbnail.orange,
+select#list {
+	border: 1px solid #f58a23 !important;
+}
+
+select#list {
+	min-width: 170px;
+}
+
+.btn-product {
+	background-color: #f58a23;
+	color: #fff;
+}
+
+.btn-product:hover{
+	background-color: white;
+	border-color: #f58a23;
+	color: #f58a23;
+}
+
+hr {
+	border-top: 1px solid #f58a23;
+	opacity: 0.3;
+}
