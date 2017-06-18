@@ -1,37 +1,50 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @list.name %>
-</p>
+<div class="bs-callout bs-callout-info">
+  <p class="lead">
+    <strong>List Name:</strong>
+    <%= @list.name %>
+  </p>
 
-<p>
-  <strong>Active:</strong>
-  <%= @list.active %>
-</p>
+  <p class="lead">
+    <strong>Active:</strong>
+    <%= @list.active %>
+  </p>
 
-<p>
-  <strong>Total price:</strong>
-  <%= @total_price %>
-</p>
+  <p class="lead">
+    <strong>Total price:</strong>
+    <%= @total_price %>€
+  </p>
+</div>
 
-<p>
-  <strong>Products:</strong>
-  <table>
-    <tbody>
+<div class="text-center">
+  <h2>Products</h2>
+</div>
+
+<table class="table table-stripped">
+  <thead>
+    <th>Image</th>
+    <th>SKU</th>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+  </thead>
+
+  <tbody>
     <% @sku.each do |sku| %>
       <tr>
         <td>
-          <img src="<%= sku.images['main'] %>" width = "30%" height = "30%" alt="<%= sku.name %>">
+          <img src="<%= sku.images['main'] %>" class="img-responsive" style="max-height: 60px" alt="<%= sku.name %>">
         </td>
         <td><%= sku.id %></td>
         <td><%= sku.name %></td>
-        <td><%= link_to 'Remove', list_removeproduct_path(:sku_id=>sku.id, :list_id=>@list.id), method: :put %></td>
+        <td><%= link_to 'Show', products_preview_path(sku: sku.id), class: 'btn btn-sm btn-primary' %></td>
+        <td><%= link_to 'Remove', list_removeproduct_path(:sku_id=>sku.id, :list_id=>@list.id), method: :put, data: { confirm: 'Really delete this product from your list?' }, class: 'btn btn-sm btn-danger' %></td>
       </tr>
     <% end %>
   </tbody>
-  </table>
+</table>
 
-<%= link_to 'Edit', edit_list_path(@list) %> |
-<%= link_to 'Back', lists_path %>
+<%= link_to 'Edit List', edit_list_path(@list), class: 'btn btn-primary' %>
+<%= link_to 'Back to Lists', lists_path, class: 'btn btn-warning' %>
 <p id="notice"><%= notice %></p>

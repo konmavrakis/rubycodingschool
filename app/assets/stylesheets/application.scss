@@ -14,7 +14,8 @@ input#sku-search, input.btn.btn-default {
 }
 
 .thumbnail.orange,
-select#list {
+select#list,
+.navbar.orange {
 	border: 1px solid #f58a23 !important;
 }
 
@@ -36,4 +37,18 @@ select#list {
 hr {
 	border-top: 1px solid #f58a23;
 	opacity: 0.3;
+}
+
+td.actions,
+td.status {
+  width: 100px;
+}
+
+.bs-callout.bs-callout-info {
+	padding: 20px;
+	margin: 20px 0;
+	border: 1px solid #eee;
+	border-left-width: 5px;
+	border-radius: 3px;
+	border-left-color: #f58a23;
 }
