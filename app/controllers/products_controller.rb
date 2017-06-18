@@ -47,5 +47,7 @@ class ProductsController < ApplicationController
     @lists = List.where('user_id=?',current_user.id )
     rescue Skroutz::ResourceNotFound
       redirect_to(products_search_path, alert: "SKU not found.")
+    rescue Skroutz::ServerError
+      redirect_to(products_search_path, alert: "Server Error.")
   end
 end
