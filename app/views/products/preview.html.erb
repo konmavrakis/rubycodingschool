@@ -1,30 +1,37 @@
-
-<h1><%= @sku.name %></h1>
-<img src="<%= @sku.images['main'] %>" alt="<%= @sku.name %>">
-<p class="price">Από <%= @sku.price_min %> έως <%= @sku.price_max %></p>
-
-<div class="add-to-list-form">
-  <%= form_tag ('/products/addtolist'), :method => :post do %> 
-    <%= hidden_field_tag "sku_id" , @sku.id %> 
-    <%= select_tag "list", options_from_collection_for_select(@lists, "id", "name") %>
-
-    <%= submit_tag "Add to List" %>
-  <% end %>
-</div>
-<br />
-
-<br />
-<div class="clearfix" > </div>
-
-<div class="panel-group">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" href="#collapse">Show JSON</a>
-      </h4>
-    </div>
-    <div id="collapse" class="panel-collapse collapse">
-      <div class="panel-body"><pre style="max-width:100%;height:100%;white-space:normal;"><%= @sku.to_json %></pre></div>
-    </div>
+<div class="container">
+    <div class="row">
+      <div class="col-sm-10 col-md-10 col-lg-10 col-md-offset-2">
+      <div class="col-sm-8 col-md-8 col-lg-8">
+        <div class="thumbnail orange">
+          <img src="<%= @sku.images['main'] %>" class="img-responsive" alt="<%= @sku.name %>">
+          <div class="caption">
+            <div class="row">
+              <div class="col-md-6 col-xs-6">
+                <h3><%= @sku.name %></h3>
+              </div>
+              <div class="col-md-6 col-xs-6 price">
+                <h3>
+                <label>Min: <%= @sku.price_min %>€<br><small>Max: <%= @sku.price_max %>€</small></label></h3>
+              </div>
+            </div>
+            <p><%= @sku.plain_spec_summary %></p>
+            <hr>
+            <div class="row">
+              <div class="col-xs-6 col-md-6">
+                <div class="add-to-list-form">
+                  <%= form_tag ('/products/addtolist'), class: 'form-inline', :method => :post do %> 
+                    <%= hidden_field_tag "sku_id" , @sku.id %> 
+                    <%= select_tag "list", options_from_collection_for_select(@lists, "id", "name"), class: 'form-control' %>
+                    <%= submit_tag "Add to List", class: 'btn btn-product' %>
+                  <% end %>
+              </div>
+              </div>
+              <div class="col-md-6">
+            </div>
+            <p> </p>
+          </div>
+        </div>
+      </div>
+      </div> 
   </div>
 </div>
