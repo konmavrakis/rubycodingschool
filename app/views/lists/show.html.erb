@@ -10,7 +10,11 @@
 
 <p>
   <strong>Final price:</strong>
-  <%= @sku.inject(0) {|sum, s| sum + s[:sku].price_min * s[:product_list].quantity }  %>
+  <% if @sku.nil?  %>
+    <span> 0.00 </span>
+  <% else %>
+    <%= @sku.inject(0) {|sum, s| sum + s[:sku].price_min * s[:product_list].quantity }  %>
+  <% end %>
 </p>
 
 <p>
@@ -40,13 +44,13 @@
             <%= s[:sku].price_min * s[:product_list].quantity %>
           </td>
           <td>
-            <%= link_to "remove one",class: "btn",  action: "decrease_quantity", controller: "product_lists",  product_list: s[:product_list] %>
+            <%= link_to "remove one", product_lists_decrease_quantity_path(id: s[:product_list]), method: :post, class: "btn btn-md btn-warning"%>
           </td>
           <td>
-            <%= link_to "add one",class: "btn",  action: "increase_quantity", controller: "product_lists",  product_list: s[:product_list] %>
+            <%= link_to "add one", product_lists_increase_quantity_path(id: s[:product_list]), method: :post, class: "btn btn-md btn-success"%>
           </td>
           <td>
-            <%= link_to 'Destroy', s[:product_list], method: :delete, data: { confirm: 'Are you sure?' } %>
+            <%= link_to 'Destroy', s[:product_list], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-md btn-danger" %>
           </td>
         </tr>
       <% end %>
