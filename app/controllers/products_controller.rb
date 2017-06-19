@@ -15,7 +15,7 @@ class ProductsController < ApplicationController
     product   = Product.where('skroutz_id=?', sku_id).first
 
     # check if product exists
-    if product.nil? 
+    if product.nil?
       product = Product.create(skroutz_id: sku_id)
     end   
 

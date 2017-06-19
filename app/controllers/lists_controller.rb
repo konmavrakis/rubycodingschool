@@ -13,14 +13,12 @@ class ListsController < ApplicationController
   # GET /lists/1
   # GET /lists/1.json
   def show
-    @total_price = 0
-    @products = @list.products
-    @sku= Array.new
-    @products.each do |product|
-      sku_id = product.skroutz_id
-      temp_sku = SkroutzApi.find_sku(sku_id)
-      @sku.push(temp_sku)
-      @total_price = @total_price + temp_sku.price_min
+    @products_list = List.find(@list.id).product_lists
+    @sku = @products_list.map do |p|
+      {
+        sku: SkroutzApi.find_sku(Product.find(p.product_id).skroutz_id),
+        product_list: p
+      }
     end
   end
 

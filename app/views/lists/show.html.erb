@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Name:</strong>
   <%= @list.name %>
@@ -11,27 +9,49 @@
 </p>
 
 <p>
-  <strong>Total price:</strong>
-  <%= @total_price %>
+  <strong>Final price:</strong>
+  <%= @sku.inject(0) {|sum, s| sum + s[:sku].price_min * s[:product_list].quantity }  %>
 </p>
 
 <p>
   <strong>Products:</strong>
-  <table>
-    <tbody>
-    <% @sku.each do |sku| %>
+  <table class="table table-bordered">
+    <thead>
       <tr>
-        <td>
-          <img src="<%= sku.images['main'] %>" width = "30%" height = "30%" alt="<%= sku.name %>">
-        </td>
-        <td><%= sku.id %></td>
-        <td><%= sku.name %></td>
-        <td><%= link_to 'Remove', list_removeproduct_path(:sku_id=>sku.id, :list_id=>@list.id), method: :put %></td>
+        <th>name</th>
+        <th>price per item</th>
+        <th>quantity</th>
+        <th>Total price</th>
       </tr>
-    <% end %>
-  </tbody>
+    </thead>
+    <tbody>
+      <% @sku.each do |s| %>
+        <tr>
+          <td>
+            <%= s[:sku].display_name %>
+          </td>
+          <td>
+            <%= s[:sku].price_min %>
+          </td>
+          <td>
+            <%= s[:product_list].quantity %>
+          </td>
+          <td>
+            <%= s[:sku].price_min * s[:product_list].quantity %>
+          </td>
+          <td>
+            <%= link_to "remove one",class: "btn",  action: "decrease_quantity", controller: "product_lists",  product_list: s[:product_list] %>
+          </td>
+          <td>
+            <%= link_to "add one",class: "btn",  action: "increase_quantity", controller: "product_lists",  product_list: s[:product_list] %>
+          </td>
+          <td>
+            <%= link_to 'Destroy', s[:product_list], method: :delete, data: { confirm: 'Are you sure?' } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
   </table>
 
 <%= link_to 'Edit', edit_list_path(@list) %> |
 <%= link_to 'Back', lists_path %>
-<p id="notice"><%= notice %></p>

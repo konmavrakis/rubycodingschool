@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'product_lists/create'
+
   get 'products/search'
   get 'products/show'
   get 'products/preview'
@@ -13,6 +15,11 @@ Rails.application.routes.draw do
   devise_for :users
   root 'pages#home'
   get 'about', to: 'pages#about'
+
+  resources :product_lists, except: [:index, :new, :show]
+  post 'product_lists/create', to: 'product_lists#create'
+  get 'product_lists/increase_quantity', to: "product_lists#increase_quantity"
+  get 'product_lists/decrease_quantity', to: "product_lists#decrease_quantity"
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -4,27 +4,13 @@
 <p class="price">Από <%= @sku.price_min %> έως <%= @sku.price_max %></p>
 
 <div class="add-to-list-form">
-  <%= form_tag ('/products/addtolist'), :method => :post do %> 
+  <%= form_tag controller: :product_lists, method: "post", action: "create"  do %> 
     <%= hidden_field_tag "sku_id" , @sku.id %> 
-    <%= select_tag "list", options_from_collection_for_select(@lists, "id", "name") %>
-
+    <%= select_tag "list_id", options_from_collection_for_select(@lists, "id", "name") %>
+    <%= number_field_tag "quantity", '1', min: 1, max: 10 %>
     <%= submit_tag "Add to List" %>
   <% end %>
 </div>
 <br />
 
 <br />
-<div class="clearfix" > </div>
-
-<div class="panel-group">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" href="#collapse">Show JSON</a>
-      </h4>
-    </div>
-    <div id="collapse" class="panel-collapse collapse">
-      <div class="panel-body"><pre style="max-width:100%;height:100%;white-space:normal;"><%= @sku.to_json %></pre></div>
-    </div>
-  </div>
-</div>

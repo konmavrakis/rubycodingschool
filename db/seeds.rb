@@ -73,6 +73,6 @@ end
   random_product = Product.find_by(skroutz_id: skus_id[random_sku_key])
 
   unless random_list.products.include? random_product
-    random_list.products << random_product
+    ProductList.create(product_id: random_product.id, list_id: random_list.id, quantity: 1)
   end
 end
