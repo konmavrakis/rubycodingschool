@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
   def home
-  	@list = List.all
+  	@list = List.where('active=?', 1)
   end
 end
