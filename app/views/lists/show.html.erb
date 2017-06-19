@@ -44,13 +44,13 @@
             <%= s[:sku].price_min * s[:product_list].quantity %>
           </td>
           <td>
-            <%= link_to "remove one", product_lists_decrease_quantity_path(id: s[:product_list]), method: :post, class: "btn btn-md btn-warning"%>
+            <%= link_to "", product_lists_decrease_quantity_path(id: s[:product_list]), method: :post, class: "btn btn-sm btn-success glyphicon glyphicon-minus"%>
           </td>
           <td>
-            <%= link_to "add one", product_lists_increase_quantity_path(id: s[:product_list]), method: :post, class: "btn btn-md btn-success"%>
+            <%= link_to "", product_lists_increase_quantity_path(id: s[:product_list]), method: :post, class: " btn btn-sm btn-primary glyphicon glyphicon-plus"%>
           </td>
           <td>
-            <%= link_to 'Destroy', s[:product_list], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-md btn-danger" %>
+            <%= link_to '', s[:product_list], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger glyphicon glyphicon-trash" %>
           </td>
         </tr>
       <% end %>
