@@ -41,21 +41,29 @@
             <%= sq[:sku].price_min %>
           </td>
           <td>
-            <%= sq[:product_list].quantity %>
+            <span id="quantity-product-list-id-<%= sq[:product_list].id %>" class="name">
+              <%= sq[:product_list].quantity %>
+            </span>
             <ul class="list-group pull-right">
               <li class="list-group-item">
                 <%= link_to '',
                   product_lists_increase_quantity_path(id: sq[:product_list]),
                   method: :post,
                   disabled: sq[:product_list].quantity > 9,
-                  class: " btn btn-xs btn-primary glyphicon glyphicon-plus" %>
+                  class: " btn btn-xs btn-primary glyphicon glyphicon-plus",
+                  id: "inc-product-list-id-#{sq[:product_list].id}",
+                  remote: true
+                %>
               </li>
               <li class="list-group-item">
                 <%= link_to '',
                   product_lists_decrease_quantity_path(id: sq[:product_list]),
                   method: :post,
                   disabled: sq[:product_list].quantity < 2,
-                  class: "btn btn-xs btn-success glyphicon glyphicon-minus"%>
+                  class: "btn btn-xs btn-success glyphicon glyphicon-minus",
+                  id: "dec-product-list-id-#{sq[:product_list].id}",
+                  remote: true
+                %>
               </li>
             </ul>
           </td>
