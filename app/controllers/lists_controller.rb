@@ -14,7 +14,7 @@ class ListsController < ApplicationController
   # GET /lists/1.json
   def show
     @products_list = List.find(@list.id).product_lists
-    @sku = @products_list.map do |p|
+    @skus_quantity = @products_list.map do |p|
       {
         sku: SkroutzApi.find_sku(Product.find(p.product_id).skroutz_id),
         product_list: p

@@ -65,7 +65,7 @@ end
 end
 
 # Add products to lists
-100.times do
+200.times do
   random_list_id = rand(List.count).next
   random_sku_key = rand(skus_id.size).next
 

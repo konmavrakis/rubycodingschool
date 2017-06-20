@@ -2,18 +2,16 @@
   <strong>Name:</strong>
   <%= @list.name %>
 </p>
-
 <p>
   <strong>Active:</strong>
   <%= @list.active %>
 </p>
-
 <p>
   <strong>Final price:</strong>
-  <% if @sku.nil?  %>
-    <span> 0.00 </span>
+  <% if @skus_quantity.nil?  %>
+    <span> - </span>
   <% else %>
-    <%= @sku.inject(0) {|sum, s| sum + s[:sku].price_min * s[:product_list].quantity }  %>
+    <%= total_price(@skus_quantity)  %>
   <% end %>
 </p>
 
@@ -22,35 +20,43 @@
   <table class="table table-bordered">
     <thead>
       <tr>
-        <th>name</th>
-        <th>price per item</th>
-        <th>quantity</th>
+        <th>Products</th>
+        <th>Price per item:</th>
+        <th>Quantity</th>
         <th>Total price</th>
       </tr>
     </thead>
     <tbody>
-      <% @sku.each do |s| %>
+      <% @skus_quantity.each do |sq| %>
         <tr>
           <td>
-            <%= s[:sku].display_name %>
+            <%= sq[:sku].display_name %>
+            <%= link_to '', sq[:product_list], method: :delete, data: { confirm: 'Are you sure?' }, class: "delete-product-list btn btn-sm btn-danger glyphicon glyphicon-trash pull-right", id: "delete-product-list-#{sq[:product_list].id}", remote: true %>
           </td>
           <td>
-            <%= s[:sku].price_min %>
+            <%= sq[:sku].price_min %>
           </td>
           <td>
-            <%= s[:product_list].quantity %>
+            <%= sq[:product_list].quantity %>
+            <ul class="list-group pull-right">
+              <li class="list-group-item">
+                <%= link_to '',
+                  product_lists_increase_quantity_path(id: sq[:product_list]),
+                  method: :post,
+                  disabled: sq[:product_list].quantity > 9,
+                  class: " btn btn-xs btn-primary glyphicon glyphicon-plus" %>
+              </li>
+              <li class="list-group-item">
+                <%= link_to '',
+                  product_lists_decrease_quantity_path(id: sq[:product_list]),
+                  method: :post,
+                  disabled: sq[:product_list].quantity < 2,
+                  class: "btn btn-xs btn-success glyphicon glyphicon-minus"%>
+              </li>
+            </ul>
           </td>
           <td>
-            <%= s[:sku].price_min * s[:product_list].quantity %>
-          </td>
-          <td>
-            <%= link_to "", product_lists_decrease_quantity_path(id: s[:product_list]), method: :post, class: "btn btn-sm btn-success glyphicon glyphicon-minus"%>
-          </td>
-          <td>
-            <%= link_to "", product_lists_increase_quantity_path(id: s[:product_list]), method: :post, class: " btn btn-sm btn-primary glyphicon glyphicon-plus"%>
-          </td>
-          <td>
-            <%= link_to '', s[:product_list], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger glyphicon glyphicon-trash" %>
+            <%= sum_price(sq) %>
           </td>
         </tr>
       <% end %>
