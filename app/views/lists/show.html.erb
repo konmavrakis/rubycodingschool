@@ -14,7 +14,6 @@
     <%= total_price(@skus_quantity)  %>
   <% end %>
 </p>
-
 <p>
   <strong>Products:</strong>
   <table class="table table-bordered">
@@ -28,10 +27,15 @@
     </thead>
     <tbody>
       <% @skus_quantity.each do |sq| %>
-        <tr>
+        <tr id="product-list-id-<%= sq[:product_list].id %>" >
           <td>
             <%= sq[:sku].display_name %>
-            <%= link_to '', sq[:product_list], method: :delete, data: { confirm: 'Are you sure?' }, class: "delete-product-list btn btn-sm btn-danger glyphicon glyphicon-trash pull-right", id: "delete-product-list-#{sq[:product_list].id}", remote: true %>
+            <%= link_to '',
+              list_remove_product_list_path(product_list_id: sq[:product_list]),
+              method: :delete, data: { confirm: 'Are you sure?' },
+              class: "delete-product-list btn btn-sm btn-danger glyphicon glyphicon-trash pull-right",
+              remote: true
+            %>
           </td>
           <td>
             <%= sq[:sku].price_min %>
