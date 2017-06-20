@@ -31,10 +31,10 @@
           <td>
             <%= sq[:sku].display_name %>
             <%= link_to '',
-              list_remove_product_list_path(product_list_id: sq[:product_list]),
+              product_list_path(product_list_id: sq[:product_list]),
               method: :delete, data: { confirm: 'Are you sure?' },
               class: "delete-product-list btn btn-sm btn-danger glyphicon glyphicon-trash pull-right",
-              remote: true
+              remote: false
             %>
           </td>
           <td>
@@ -52,7 +52,7 @@
                   disabled: sq[:product_list].quantity > 9,
                   class: " btn btn-xs btn-primary glyphicon glyphicon-plus",
                   id: "inc-product-list-id-#{sq[:product_list].id}",
-                  remote: true
+                  remote: false
                 %>
               </li>
               <li class="list-group-item">
@@ -62,7 +62,7 @@
                   disabled: sq[:product_list].quantity < 2,
                   class: "btn btn-xs btn-success glyphicon glyphicon-minus",
                   id: "dec-product-list-id-#{sq[:product_list].id}",
-                  remote: true
+                  remote: false
                 %>
               </li>
             </ul>

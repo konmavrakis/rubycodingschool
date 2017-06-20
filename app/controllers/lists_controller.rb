@@ -71,15 +71,6 @@ class ListsController < ApplicationController
     end
   end
 
-  def remove_product_list
-    @product_list = ProductList.find(params[:product_list_id]).delete
-
-    respond_to do |format|
-      format.html { redirect_to list_path(id: @product_list.list_id), notice: 'Product was successfully removed from list.' }
-      format.js
-    end
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_list
