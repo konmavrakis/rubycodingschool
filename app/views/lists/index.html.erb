@@ -25,6 +25,10 @@
   </tbody>
 </table>
 
+<hr />
+<%= paginate @lists %>
+<%= page_entries_info @lists %>
+<hr />
 <br>
 
 <%= link_to 'New List', new_list_path %>
