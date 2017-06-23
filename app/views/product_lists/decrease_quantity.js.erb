@@ -6,5 +6,5 @@ $("#inc-product-list-id-<%= @product_list.id %>").attr("disabled", <%= @product_
 $("#dec-product-list-id-<%= @product_list.id %>").attr("disabled", <%= @product_list.quantity < 2 %>);
 
 $('#final-price').text(function(i, originText){
-  return (parseFloat(originText) - <%= @product_price %>);
+  return (parseFloat(originText) - <%= @product_price %>).toFixed(2);
 });
