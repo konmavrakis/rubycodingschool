@@ -73,15 +73,15 @@ class ListsController < ApplicationController
     end
   end
 
-  def RemoveProduct
+  def remove_product
     id_to_delete = params[:sku_id]
-    #list = params[:list]
     active_list = List.find(params[:list_id])
+    
     if List.find(params[:list_id]).user_id == current_user.id
       active_list.products.delete(active_list.products.find_by(skroutz_id: id_to_delete).id)
-      redirect_to action: "show", id: active_list,  flash: {notice: "Product successfully removed"}
+      redirect_to( list_path(id: active_list), notice: 'Product deleted')  
     else
-      redirect_to action: "show", id: active_list,  flash: {notice: "You don't have access to delete products from this list"}
+      redirect_to( list_path(id: active_list), alert: 'You don\'t have access to delete this product')  
     end
   end
 
@@ -93,6 +93,6 @@ class ListsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def list_params
-      params.require(:list).permit(:name, :active, :total_price)
+      params.require(:list).permit(:name, :active, :total_price, :sku_id)
     end
 end

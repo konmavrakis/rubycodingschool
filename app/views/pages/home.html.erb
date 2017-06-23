@@ -1,19 +1,29 @@
 <h1>Welcome to Ruby Codin School Project</h1>
 <% @list.each do |l| %>
-<div class="bs-callout bs-callout-info col-xs-12 col-md-12 col-lg-12">
-	<div class="col-xs-8 col-md-8 col-lg-8">
-	  <p class="lead"><strong>List Name: </strong><%= l.name %></p>
-
-	  <p class="lead"><strong>Active: </strong><%= l.active %></p>
-
-		<p class="lead"><strong>Created by: </strong><%= User.find(l.user_id).name %></p>	
-
-		<p class="lead"><strong>Created on: </strong><%= l.created_at %></p>
+<div class="item  col-xs-4 col-lg-4">
+	<div class="thumbnail orange">
+		<img class="group list-group-image" src="assets/avatar_default_big.png" alt="" />
+		<div class="caption">
+			<h4 class="group inner list-group-item-heading"><%= l.name %></h4>
+				<p class="group inner list-group-item-text">
+					<ul class="list-inline lists">
+						<li><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <%= User.find(l.user_id).name %>
+						</li>
+						<li><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> <%= l.created_at.strftime('%A %D') %></li>
+						</ul>
+				</p>
+				<div class="row">
+					<div class="col-xs-12 col-md-6">
+						<p class="lead"><% if l.active.to_s == "true" %>
+							<span class="glyphicon glyphicon-globe"></span>
+						<% end %></p>
+					</div>
+				<div class="col-xs-12 col-md-6">
+					<a class="btn btn-product" href="lists/<%= l.id %>">Show List</a>
+				</div>
+			</div>
 		</div>
-		
-		<div class="col-xs-4 col-md-4 col-lg-4">
-		<a class="btn btn-lg btn-product" href="lists/<%= l.id %>" style="position:absolute;bottom: -200px">Show List</a>
-		</div>
-
+	</div>
 </div>
+
 <% end %>
