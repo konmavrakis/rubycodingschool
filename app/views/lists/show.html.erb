@@ -11,7 +11,7 @@
 
   <p class="lead">
     <strong>Total price:</strong>
-    <%= @total_price %>€
+    <%= number_with_precision(@total_price, precision: 2) %>€
   </p>
 </div>
 
