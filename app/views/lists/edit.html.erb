@@ -1,6 +1,9 @@
 <h1>Editing List</h1>
-
-<%= render 'form', list: @list %>
-
-<%= link_to 'Show', @list %> |
-<%= link_to 'Back', lists_path %>
+<% if @list.user_id == current_user.id %>
+  <%= render 'form', list: @list %>
+  <br>
+  <%= link_to 'Show List', @list, class: 'btn btn-success' %>
+<% else %>
+  <h1>You don't have access to edit this list</h1>
+<% end %>
+<%= link_to 'Back to Lists', lists_path, class: 'btn btn-warning' %>

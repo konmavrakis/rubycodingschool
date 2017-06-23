@@ -1,1 +1,29 @@
 <h1>Welcome to Ruby Codin School Project</h1>
+<% @list.each do |l| %>
+<div class="item  col-xs-4 col-lg-4">
+	<div class="thumbnail orange">
+		<img class="group list-group-image" src="assets/avatar_default_big.png" alt="" />
+		<div class="caption">
+			<h4 class="group inner list-group-item-heading"><%= l.name %></h4>
+				<p class="group inner list-group-item-text">
+					<ul class="list-inline lists">
+						<li><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <%= User.find(l.user_id).name %>
+						</li>
+						<li><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> <%= l.created_at.strftime('%A, %e %B %Y') %></li>
+						</ul>
+				</p>
+				<div class="row">
+					<div class="col-xs-12 col-md-6">
+						<p class="lead"><% if l.active.to_s == "true" %>
+							<span class="glyphicon glyphicon-globe"></span>
+						<% end %></p>
+					</div>
+				<div class="col-xs-12 col-md-6">
+					<a class="btn btn-product" href="lists/<%= l.id %>">Show List</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<% end %>

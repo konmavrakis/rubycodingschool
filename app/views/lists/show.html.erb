@@ -1,37 +1,45 @@
-<p id="notice"><%= notice %></p>
+<div class="bs-callout bs-callout-info">
+  <ul class="list-inline lists">
+    <li><p class="lead"><span class="glyphicon glyphicon glyphicon-user"></span> <%= User.find(List.find(@list.id).user_id).name %></p></li>
+    <li><p class="lead"><span class="glyphicon glyphicon glyphicon-th-list"></span> <%= @list.name %></p></li>
+    <li><p class="lead"><span class="glyphicon glyphicon glyphicon-globe"></span> <%= @list.active %></p></li>
+    <li><p class="lead"><span class="glyphicon glyphicon glyphicon-shopping-cart"></span> <%= number_with_precision(@total_price, precision: 2) %>€</p></li>
+  </ul>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @list.name %>
-</p>
+<div class="text-center">
+  <h2>Products</h2>
+</div>
 
-<p>
-  <strong>Active:</strong>
-  <%= @list.active %>
-</p>
+<table class="table table-stripped">
+  <thead>
+    <th>Image</th>
+    <th>SKU</th>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+  </thead>
 
-<p>
-  <strong>Total price:</strong>
-  <%= @total_price %>
-</p>
-
-<p>
-  <strong>Products:</strong>
-  <table>
-    <tbody>
+  <tbody>
     <% @sku.each do |sku| %>
       <tr>
         <td>
-          <img src="<%= sku.images['main'] %>" width = "30%" height = "30%" alt="<%= sku.name %>">
+          <img src="<%= sku.images['main'] %>" class="img-responsive" style="max-height: 60px" alt="<%= sku.name %>">
         </td>
         <td><%= sku.id %></td>
         <td><%= sku.name %></td>
-        <td><%= link_to 'Remove', list_removeproduct_path(:sku_id=>sku.id, :list_id=>@list.id), method: :put %></td>
+        <td><%= link_to 'Show', products_preview_path(sku: sku.id), class: 'btn btn-sm btn-primary' %></td>
+        <% if @list.user_id == current_user.id %>
+          <td><%= link_to 'Remove', list_removeproduct_path(:sku_id=>sku.id, :list_id=>@list.id, :user_id => @list.user_id), method: :put, data: { confirm: 'Really delete this product from your list?' }, class: 'btn btn-sm btn-danger' %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
-  </table>
-
-<%= link_to 'Edit', edit_list_path(@list) %> |
-<%= link_to 'Back', lists_path %>
-<p id="notice"><%= notice %></p>
+</table>
+<div class="btn-group">
+<% if @list.user_id == current_user.id %>
+  <%= link_to 'Edit List', edit_list_path(@list), class: 'btn btn-primary' %>
+<% end %>
+<%= link_to 'Back to Your Lists', lists_path, class: 'btn btn-warning' %>
+<%= link_to 'Back to All Lists', root_path, class: 'btn btn-info' %>
+</div>
