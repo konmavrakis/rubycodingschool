@@ -1,2 +1,6 @@
 $('#product-list-id-<%= @product_list.id %>').remove();
 
+$('#final-price').text(function(i, originText){
+  return (parseFloat(originText) - <%= @product_total_price %>).toFixed(2);
+});
+

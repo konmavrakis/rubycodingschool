@@ -8,10 +8,13 @@
 </p>
 <p>
   <strong>Final price:</strong>
-  <% if @skus_quantity.nil?  %>
+  <% if @skus_quantity.nil? %>
     <span> - </span>
   <% else %>
-    <%= total_price(@skus_quantity)  %>
+    €
+    <span id="final-price">
+      <%= sprintf("%.2f",total_price(@skus_quantity))  %>
+    </span>
   <% end %>
 </p>
 <p>
@@ -31,44 +34,48 @@
           <td>
             <%= sq[:sku].display_name %>
             <%= link_to '',
-              product_list_path(product_list_id: sq[:product_list]),
+              product_list_path(product_list_id: sq[:product_list], product_total_price: [sum_price(sq)]),
               method: :delete, data: { confirm: 'Are you sure?' },
               class: "delete-product-list btn btn-sm btn-danger glyphicon glyphicon-trash pull-right",
-              remote: false
+              remote: true
             %>
           </td>
           <td>
-            <%= sq[:sku].price_min %>
+            €
+            <%= sq[:sku_price] %>
           </td>
           <td>
             <span id="quantity-product-list-id-<%= sq[:product_list].id %>" class="name">
-              <%= sq[:product_list].quantity %>
+              <%= sq[:quantity] %>
             </span>
             <ul class="list-group pull-right">
               <li class="list-group-item">
                 <%= link_to '',
-                  product_lists_increase_quantity_path(id: sq[:product_list]),
+                  product_lists_increase_quantity_path(id: sq[:product_list], product_price: sq[:sku_price]),
                   method: :post,
                   disabled: sq[:product_list].quantity > 9,
                   class: " btn btn-xs btn-primary glyphicon glyphicon-plus",
                   id: "inc-product-list-id-#{sq[:product_list].id}",
-                  remote: false
+                  remote: true
                 %>
               </li>
               <li class="list-group-item">
                 <%= link_to '',
-                  product_lists_decrease_quantity_path(id: sq[:product_list]),
+                  product_lists_decrease_quantity_path(id: sq[:product_list], product_price: sq[:sku_price]),
                   method: :post,
                   disabled: sq[:product_list].quantity < 2,
                   class: "btn btn-xs btn-success glyphicon glyphicon-minus",
                   id: "dec-product-list-id-#{sq[:product_list].id}",
-                  remote: false
+                  remote: true
                 %>
               </li>
             </ul>
           </td>
           <td>
-            <%= sum_price(sq) %>
+            €
+            <span id="product-total-price-id-<%= sq[:product_list].id %>" class="name">
+              <%= sum_price(sq) %>
+            </span>
           </td>
         </tr>
       <% end %>

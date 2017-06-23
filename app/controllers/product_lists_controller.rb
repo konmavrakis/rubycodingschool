@@ -27,6 +27,8 @@ class ProductListsController < ApplicationController
 
   def destroy
     @product_list = ProductList.find(params[:product_list_id]).delete
+    @product_total_price = params[:product_total_price].first.to_f
+
     lst = List.find(@product_list.list_id)
 
     respond_to do |format|
@@ -37,6 +39,7 @@ class ProductListsController < ApplicationController
 
   def increase_quantity
     @product_list = ProductList.find(params[:id])
+    @product_price = params[:product_price].to_f
     @product_list.increase
 
     respond_to do |format|
@@ -47,11 +50,14 @@ class ProductListsController < ApplicationController
 
   def decrease_quantity
     @product_list = ProductList.find(params[:id])
-    @product_list.decrease
+    @product_price = params[:product_price].to_f
+    if @product_list.quantity > 1
+      @product_list.decrease
 
-    respond_to do |format|
-      format.html { redirect_to List.find(@product_list.list_id) }
-      format.js
+      respond_to do |format|
+        format.html { redirect_to List.find(@product_list.list_id) }
+        format.js
+      end
     end
   end
 end

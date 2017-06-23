@@ -15,8 +15,13 @@ class ListsController < ApplicationController
   def show
     @products_list = List.find(@list.id).product_lists
     @skus_quantity = @products_list.map do |p|
+      sku = SkroutzApi.find_sku(Product.find(p.product_id).skroutz_id)
       {
-        sku: SkroutzApi.find_sku(Product.find(p.product_id).skroutz_id),
+        sku: sku,
+        sku_id: sku.id,
+        sku_name: sku.display_name,
+        sku_price: sprintf("%.2f", sku.price_min),
+        quantity: p.quantity,
         product_list: p
       }
     end
