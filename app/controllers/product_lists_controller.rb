@@ -27,7 +27,7 @@ class ProductListsController < ApplicationController
 
   def destroy
     @product_list = ProductList.find(params[:product_list_id]).delete
-    @product_total_price = params[:product_total_price].first.to_f
+    @product_price = params[:product_price].to_f
 
     lst = List.find(@product_list.list_id)
 

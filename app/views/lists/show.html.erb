@@ -34,7 +34,7 @@
           <td>
             <%= sq[:sku].display_name %>
             <%= link_to '',
-              product_list_path(product_list_id: sq[:product_list], product_total_price: [sum_price(sq)]),
+              product_list_path(product_list_id: sq[:product_list], product_price: sq[:sku_price]),
               method: :delete, data: { confirm: 'Are you sure?' },
               class: "delete-product-list btn btn-sm btn-danger glyphicon glyphicon-trash pull-right",
               remote: true
