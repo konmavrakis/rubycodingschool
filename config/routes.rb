@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   #post 'products/preview', to: redirect('/products/preview/#{sku}')
   get 'products/preview/:sku', to: 'products#preview'
-  put 'list/removeproduct', to: 'lists#RemoveProduct'
+  put 'list/removeproduct', to: 'lists#remove_product'
 
   post 'products/addtolist', to: 'products#add_product_to_list'
 
