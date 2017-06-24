@@ -11,7 +11,7 @@
   <body>
     <div class="container">
 
-    <%= render "top_menu" %>
+      <%= render "top_menu" %>
 
 
 
@@ -22,10 +22,17 @@
         <p class="alert alert-danger"><%= alert %></p>
       <% end %>
       <div class="row main">
-        
+
         <%= yield %>
-        
+
       </div>
+      <footer class="footer">
+        <div class="text-center">
+          <hr>
+          <p>Ruby Coding School 2017</p>
+        </div>
+      </footer>
     </div>
+
   </body>
 </html>
