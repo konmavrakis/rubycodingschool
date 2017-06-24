@@ -1,9 +1,6 @@
-<p id="notice"><%= notice %></p>
+<h1>Lists <%= link_to 'New List', new_list_path, class: 'btn btn-sm btn-primary'%></h1>
 
-<h1>Lists</h1>
-<pre><%= @result.to_json %></pre>
-
-<table>
+<table  class="table table-stripped">
   <thead>
     <tr>
       <th>Name</th>
@@ -15,11 +12,11 @@
   <tbody>
     <% @lists.each do |list| %>
       <tr>
-        <td><%= list.name %></td>
-        <td><%= list.active %></td>
-        <td><%= link_to 'Show', list %></td>
-        <td><%= link_to 'Edit', edit_list_path(list) %></td>
-        <td><%= link_to 'Destroy', list, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td class="name"><%= list.name %></td>
+        <td class="status"><%=  list.active %></td>
+        <td class="actions"><%= link_to 'Show List', list, class: 'btn btn-sm btn-primary' %></td>
+        <td class="actions"><%= link_to 'Edit List', edit_list_path(list), class: 'btn btn-sm btn-warning' %></td>
+        <td class="actions"><%= link_to 'Destroy List', list, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %></td>
       </tr>
     <% end %>
   </tbody>
@@ -30,5 +27,3 @@
 <%= page_entries_info @lists %>
 <hr />
 <br>
-
-<%= link_to 'New List', new_list_path %>
