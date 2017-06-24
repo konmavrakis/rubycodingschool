@@ -13,8 +13,12 @@
 						</ul>
 				</p>
 				<div class="row">
-					<div class="col-xs-12 col-md-6">
-					<span class="glyphicon glyphicon-star"></span> <%= 	rating_for l, "name", disable_after_rate: true %>
+					<div class="col-xs-12 col-md-6"> 
+						<%= 
+							if Rate.find_by(rateable_id: l.id)
+								rating_for l, 'name', disable_after_rate: true, avg: true 
+							end
+						%>
 					</div>
 				<div class="col-xs-12 col-md-6">
 					<a class="btn btn-product pull-right" href="lists/<%= l.id %>">Show List</a>
