@@ -30,8 +30,10 @@
 </div>
 <div class="row text-center">
   <hr />
-  <%= paginate @list %>
-  <br>
-  <%= page_entries_info @list %>
-  <hr />
+  <div class="pull-right">
+    <%= paginate @list %>
+  </div>
+  <div class="pull-left">
+    <%= page_entries_info @list %>
+  </div>
 </div>
