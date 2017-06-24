@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   # Associations
   # ===========
-  has_many :lists
+  has_many :lists, dependent: :destroy
  
 
   # Devise Config
