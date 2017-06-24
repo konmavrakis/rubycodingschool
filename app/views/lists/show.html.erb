@@ -5,6 +5,7 @@
     <li><p class="lead"><span class="glyphicon glyphicon glyphicon-globe"></span> <%= @list.active %></p></li>
     <li><p class="lead"><span class="glyphicon glyphicon glyphicon-shopping-cart"></span> <%= number_with_precision(@total_price, precision: 2) %>€</p></li>
   </ul>
+  <%= rating_for @list, 'name', disable_after_rate: false %>
 </div>
 
 <div class="text-center">
@@ -36,6 +37,7 @@
     <% end %>
   </tbody>
 </table>
+
 <div class="btn-group">
 <% if @list.user_id == current_user.id %>
   <%= link_to 'Edit List', edit_list_path(@list), class: 'btn btn-primary' %>

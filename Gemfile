@@ -24,6 +24,7 @@ gem 'therubyracer', platforms: :ruby
 
 gem 'bootstrap-sass', '~> 3.3.6'
 
+gem 'ratyrate'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
