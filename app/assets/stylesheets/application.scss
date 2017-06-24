@@ -61,3 +61,13 @@ ul.list-inline.lists{
 .glyphicon{
 	color: #f58a23;
 }
+
+.pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus, .pagination > .active > span, .pagination > .active > span:hover, .pagination > .active > span:focus{
+  background-color: #f58a23;
+  border-color: #f58a23; 
+}
+
+.pagination > li > a, .pagination > li > span,
+.pagination > li > a:hover, .pagination > li > a:focus, .pagination > li > span:hover, .pagination > li > span:focus {
+  color: #f58a23;
+}
