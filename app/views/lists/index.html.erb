@@ -22,8 +22,13 @@
   </tbody>
 </table>
 
-<hr />
-<%= paginate @lists %>
-<%= page_entries_info @lists %>
-<hr />
-<br>
+</div>
+<div class="row text-center">
+  <hr />
+  <div class="pull-right">
+    <%= paginate @lists %>
+  </div>
+  <div class="pull-left">
+    <%= page_entries_info @lists %>
+  </div>
+</div>
