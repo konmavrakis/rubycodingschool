@@ -5,6 +5,10 @@ $("#product-total-price-id-<%= @product_list.id %>").text(<%= sprintf("%.2f", @p
 $("#inc-product-list-id-<%= @product_list.id %>").attr("disabled", <%= @product_list.quantity > 9 %>);
 $("#dec-product-list-id-<%= @product_list.id %>").attr("disabled", <%= @product_list.quantity < 2 %>);
 
-$('#final-price').text(function(i, originText){
-  return (parseFloat(originText) - <%= @product_price %>).toFixed(2);
+$('#final-price').text(function(){
+  var sum = 0;
+  $(".product-total-price").each(function(){
+    sum += Number($(this).text());
+  });
+  return sum.toFixed(2);
 });

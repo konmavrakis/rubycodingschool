@@ -1,6 +1,10 @@
 $('#product-list-id-<%= @product_list.id %>').remove();
 
-$('#final-price').text(function(i, originText){
-  return (parseFloat(originText) - <%= @product_price * @product_list.quantity %>).toFixed(2);
+$('#final-price').text(function(){
+  var sum = 0;
+  $(".product-total-price").each(function(){
+    sum += Number($(this).text());
+  });
+  return sum;
 });
 
