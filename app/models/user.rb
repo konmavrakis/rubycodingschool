@@ -31,5 +31,8 @@ class User < ApplicationRecord
     too_long: "%{count} characters is the maximum allowed", 
     too_short: "must have at least %{count} characters"  
   }
+
+  #Rating
+  ratyrate_rater
  
 end
