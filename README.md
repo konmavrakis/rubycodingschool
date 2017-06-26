@@ -24,3 +24,9 @@ and run
 to run the server
 
 ``rails server``
+
+### Awesome Print
+
+You can use ``awesome_print`` in ``rails c`` in order to see ``hashes`` etc. 
+
+e.g. ``ap User.all``
