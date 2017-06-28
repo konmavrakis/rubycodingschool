@@ -4,7 +4,7 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Active</th>
+      <th colspan="0.5"></th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -12,8 +12,15 @@
   <tbody>
     <% @lists.each do |list| %>
       <tr>
-        <td class="name"><%= list.name %></td>
-        <td class="status"><%=  list.active %></td>
+        <td class="name"><%= list.name %>
+          <td>
+            <%if list.active %>
+              <span class="label label-success">Active</span>
+            <% else %>
+              <span class="label label-default">Inactive</span>
+            <% end %>
+          </td>
+        </td>
         <td class="actions"><%= link_to 'Show List', list, class: 'btn btn-sm btn-primary' %></td>
         <td class="actions"><%= link_to 'Edit List', edit_list_path(list), class: 'btn btn-sm btn-warning' %></td>
         <td class="actions"><%= link_to 'Destroy List', list, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %></td>
