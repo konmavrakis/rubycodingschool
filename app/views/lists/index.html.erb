@@ -12,7 +12,7 @@
   <tbody>
     <% @lists.each do |list| %>
       <tr>
-        <td class="name"><%= list.name %>
+        <td class="names"><%= link_to list.name, list %>
           <td>
             <%if list.active %>
               <span class="label lb-md label-success">Active</span>
@@ -21,7 +21,6 @@
             <% end %>
           </td>
         </td>
-        <td class="actions"><%= link_to '', list, class: 'btn btn-lg btn-primary glyphicon whiteglyphicon glyphicon-list-alt' %></td>
         <td class="actions"><%= link_to '', edit_list_path(list), class: 'btn btn-lg btn-warning glyphicon whiteglyphicon glyphicon-pencil' %></td>
         <td class="actions"><%= link_to '', list, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-lg btn-danger glyphicon whiteglyphicon glyphicon-trash'%></td>
       </tr>
