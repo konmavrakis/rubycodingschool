@@ -9,7 +9,7 @@
   border-left: none !important;
 }
 
-input#sku-search, input.btn.btn-default {
+input#list-search , input#sku-search, input.btn.btn-default {
   height: 50px !important;
 }
 
@@ -70,4 +70,9 @@ ul.list-inline.lists{
 .pagination > li > a, .pagination > li > span,
 .pagination > li > a:hover, .pagination > li > a:focus, .pagination > li > span:hover, .pagination > li > span:focus {
   color: #f58a23;
+}
+
+h1.intro {
+	font-size: 20px;
+	text-align: center;	
 }

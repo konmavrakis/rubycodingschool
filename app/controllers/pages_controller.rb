@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
   def home
-  	@list = List.where('active=?', true).order('created_at desc').page(params[:page]).per(9)
+    @list = List.search(params[:keyword],1, params[:page] )
   end
 end

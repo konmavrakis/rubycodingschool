@@ -1,7 +1,7 @@
 <div class="text-center">
 <div class="jumbotron">
 	<%= form_tag ('preview'), :method => :get do %>
-	<div class="col-lg-6 col-md-offset-3 sku-search">
+	<div class="col-md-6 col-md-offset-3 sku-search">
 	    <div class="input-group">
 	    	<%= text_field_tag :sku, params[:sku], placeholder: "Enter SKU", class: "form-control", id: 'sku-search' %>
 	    	<span class="input-group-btn"><%= submit_tag "Get Product", class: 'btn btn-default' %></span>
