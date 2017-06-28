@@ -3,6 +3,10 @@ class List < ApplicationRecord
   has_many :product_lists, dependent: :destroy
   has_many :products, through: :product_lists
 
+  #Rating
+  ratyrate_rateable "name"
+  
+  #General search
   def self.search(search, options = {} )
     
     @whereString = "1=1"
