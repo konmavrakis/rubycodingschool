@@ -1,0 +1,8 @@
+<ul>
+<% @lists.each do |list|%>
+<li>
+<%= List.find(list.list_id).name %>
+<%= link_to "Remove",favorite_list_path(favlist_id = list.id), method: "delete"%>
+</li>
+<%end%>
+</ul>

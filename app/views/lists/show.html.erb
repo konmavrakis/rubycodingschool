@@ -4,6 +4,7 @@
     <li><p class="lead"><span class="glyphicon glyphicon glyphicon-th-list"></span> <%= @list.name %></p></li>
     <li><p class="lead"><span class="glyphicon glyphicon glyphicon-globe"></span> <%= @list.active %></p></li>
     <li><p class="lead"><span class="glyphicon glyphicon glyphicon-shopping-cart"></span> <%= number_with_precision(@total_price, precision: 2) %>€</p></li>
+    <li><%= link_to "Add to favorites", favorite_lists_path(list_id: @list.id),method: "post"%></li>
   </ul>
   <%= rating_for @list, 'name', disable_after_rate: false %>
 </div>

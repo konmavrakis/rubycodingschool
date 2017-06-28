@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'products/show'
   get 'products/preview'
   resources :lists
+  resources :favorite_lists
 
   #post 'products/preview', to: redirect('/products/preview/#{sku}')
   get 'products/preview/:sku', to: 'products#preview'
