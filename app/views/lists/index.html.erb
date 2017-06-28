@@ -1,5 +1,17 @@
 <h1>Lists <%= link_to 'New List', new_list_path, class: 'btn btn-sm btn-primary'%></h1>
 
+<%= form_tag (''), :method => :get do %>
+<div class="col-xs-12 col-md-6 col-md-offset-3 list-search">
+    <div class="input-group">
+      <%= text_field_tag :keyword, params[:keyword], placeholder: "Search for a list by name", class: "form-control", id: 'list-search' %>
+      <span class="input-group-btn"><%= submit_tag "Search", class: 'btn btn-default' %></span>
+  </div>
+</div>
+<% end %>
+		
+<div class="clearfix"></div>
+<br />
+
 <table  class="table table-stripped">
   <thead>
     <tr>

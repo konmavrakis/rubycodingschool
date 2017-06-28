@@ -21,7 +21,7 @@
 			<h4 class="group inner list-group-item-heading"><%= l.name %></h4>
 				<p class="group inner list-group-item-text">
 					<ul class="list-inline lists">
-						<li><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <%= User.find(l.user_id).name %>
+						<li><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <%= l.user.name %>
 						</li>
 						<li><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> <%= l.created_at.strftime('%A, %e %B %Y') %></li>
 						</ul>
