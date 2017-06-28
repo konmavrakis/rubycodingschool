@@ -2,7 +2,7 @@ class User < ApplicationRecord
   # Associations
   # ===========
   has_many :lists, dependent: :destroy
- 
+  has_many :favorite_lists
 
   # Devise Config
   # =============
