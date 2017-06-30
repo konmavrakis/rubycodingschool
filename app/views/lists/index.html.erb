@@ -15,11 +15,11 @@
         <td class="names">
           <%= link_to list.name, list %>
         </td>
-          <td>
+          <td class="status">
             <%if list.active %>
-              <span class="status label lb-md label-success">Active</span>
+              <span class="label lb-md label-success">Active</span>
             <% else %>
-              <span class="status label label-default lb-md">Inactive</span>
+              <span class="label label-default lb-md">Inactive</span>
             <% end %>
           </td>
         </td>
