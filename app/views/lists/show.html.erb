@@ -2,7 +2,15 @@
   <ul class="list-inline lists">
     <li><p class="lead"><span class="glyphicon glyphicon glyphicon-user"></span> <%= User.find(List.find(@list.id).user_id).name %></p></li>
     <li><p class="lead"><span class="glyphicon glyphicon glyphicon-th-list"></span> <%= @list.name %></p></li>
-    <li><p class="lead"><span class="glyphicon glyphicon glyphicon-globe"></span> <%= @list.active %></p></li>
+    <li>
+      <p class="lead"><span class="glyphicon glyphicon glyphicon-globe"></span>
+        <%if @list.active%>
+          Active
+        <%else%>
+          Inactive
+        <%end%>
+      </p>
+    </li>
     <li><p class="lead"><span class="glyphicon glyphicon glyphicon-shopping-cart"></span> <%= number_with_precision(@total_price, precision: 2) %>€</p></li>
   </ul>
   <%= rating_for @list, 'name', disable_after_rate: false %>
