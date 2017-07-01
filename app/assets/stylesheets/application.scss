@@ -9,13 +9,13 @@
   border-left: none !important;
 }
 
-input#sku-search, input.btn.btn-default {
+input#list-search , input#sku-search, input.btn.btn-default {
   height: 50px !important;
 }
 
 .thumbnail.orange,
 select#list,
-.navbar.orange 
+.navbar.orange
 .orange {
 	border: 1px solid #f58a23 !important;
 }
@@ -40,6 +40,10 @@ hr {
 	opacity: 0.3;
 }
 
+td{
+  font-size: 16px;
+}
+
 td.actions,
 td.status {
   width: 100px;
@@ -62,9 +66,17 @@ ul.list-inline.lists{
 	color: #f58a23;
 }
 
+.whiteglyphicon{
+	color: #ffffff;
+}
+
+.lb-md {
+  font-size: 16px;
+}
+
 .pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus, .pagination > .active > span, .pagination > .active > span:hover, .pagination > .active > span:focus{
   background-color: #f58a23;
-  border-color: #f58a23; 
+  border-color: #f58a23;
 }
 
 .pagination > li > a, .pagination > li > span,
@@ -77,3 +89,8 @@ text-decoration: none;
 color:#f58a23;
 
 }
+h1.intro {
+	font-size: 20px;
+	text-align: center;	
+}
+
