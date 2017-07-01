@@ -36,7 +36,7 @@
           </td>
         </td>
         <td class="actions"><%= link_to '', edit_list_path(list), class: 'btn btn-md btn-warning glyphicon whiteglyphicon glyphicon-pencil' %></td>
-        <td class="actions"><%= link_to '', list, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-md btn-danger glyphicon whiteglyphicon glyphicon-trash'%></td>
+        <td class="actions"><%= link_to '', list, method: :delete, data: { confirm: 'Do you really want to delete this list?' }, class: 'btn btn-md btn-danger glyphicon whiteglyphicon glyphicon-trash'%></td>
       </tr>
     <% end %>
   </tbody>
