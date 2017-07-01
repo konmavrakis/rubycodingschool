@@ -4,11 +4,55 @@
     <li><p class="lead"><span class="glyphicon glyphicon glyphicon-th-list"></span> <%= @list.name %></p></li>
     <li><p class="lead"><span class="glyphicon glyphicon glyphicon-globe"></span> <%= @list.active %></p></li>
     <li><p class="lead"><span class="glyphicon glyphicon glyphicon-shopping-cart"></span> <%= number_with_precision(@total_price, precision: 2) %>€</p></li>
-    <li><%= link_to "Add to favorites", favorite_lists_path(list_id: @list.id),method: "post"%></li>
+    <li>
+    <a href="javascript:;;" 
+            data-list-id="<%=@list.id%>" 
+            <% unless @favorite_list %>
+            data-method="post"  
+            class="glyphicon glyphicon-heart-empty heartlink"
+            data-href="/favorite_lists.json?list_id=<%=@list.id%>"
+            <% else %>
+            data-method="delete"  
+            data-href="/favorite_lists/<%=@favorite_list.id%>.json"
+            class="glyphicon glyphicon-heart heartlink" 
+
+            <% end %>
+            style="font-size: 20px"></a>
+    </li>
+ 
   </ul>
   <%= rating_for @list, 'name', disable_after_rate: false %>
 </div>
 
+<script type="text/javascript">
+  $(".heartlink").click(function(){
+    var el = $(this);
+    var method = el.attr('data-method'); 
+
+    $.ajax({
+      method:  method,
+      url: el.attr('data-href'),
+      dataType: 'json',
+      success: function(r) {
+        if(r.resp == "ok") {
+          if(method == "post") {
+            // r.list.id
+            el.attr('data-method', 'delete');
+            el.attr('data-href', '/favorite_lists/' + r.list.id +'.json');
+            el.removeClass('glyphicon-heart-empty').addClass('glyphicon-heart');
+          } else {
+            el.attr('data-method', 'post');
+            el.attr('data-href', '/favorite_lists.json?list_id=' + el.attr('data-list-id'));
+            el.removeClass('glyphicon-heart').addClass('glyphicon-heart-empty');
+          }
+
+        }
+      }
+    });
+
+  });
+
+</script>
 <div class="text-center">
   <h2>Products</h2>
 </div>

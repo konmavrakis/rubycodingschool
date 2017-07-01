@@ -71,3 +71,9 @@ ul.list-inline.lists{
 .pagination > li > a:hover, .pagination > li > a:focus, .pagination > li > span:hover, .pagination > li > span:focus {
   color: #f58a23;
 }
+
+.heartlink:hover, .heartlink:active, .heartlink:visited, .heartlink:focus{
+text-decoration: none;
+color:#f58a23;
+
+}
