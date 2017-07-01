@@ -1,4 +1,18 @@
-<h1>Welcome to Ruby Codin School Project</h1>
+<h1 class="text-center intro">Welcome to Ruby Codin School Project</h1>
+
+		<%= form_tag (''), :method => :get do %>
+		<div class="col-xs-12 col-md-6 col-md-offset-3 list-search">
+				<div class="input-group">
+					<%= text_field_tag :keyword, params[:keyword], placeholder: "Search for a list by name", class: "form-control", id: 'list-search' %>
+					<span class="input-group-btn"><%= submit_tag "Search", class: 'btn btn-default' %></span>
+			</div>
+		</div>
+
+		<% end %>
+		
+<div class="clearfix"></div>
+<br />
+<div class="col-xs-12 item-list">
 <% @list.each do |l| %>
 <div class="item  col-xs-4 col-lg-4">
 	<div class="thumbnail orange">
@@ -7,7 +21,7 @@
 			<h4 class="group inner list-group-item-heading"><%= l.name %></h4>
 				<p class="group inner list-group-item-text">
 					<ul class="list-inline lists">
-						<li><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <%= User.find(l.user_id).name %>
+						<li><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <%= l.user.name %>
 						</li>
 						<li><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> <%= l.created_at.strftime('%A, %e %B %Y') %></li>
 						</ul>
@@ -28,9 +42,9 @@
 	</div>
 </div>
 <% end %>
-
 </div>
-<div class="row text-center">
+
+<div class="col-xs-12 text-center">
   <hr />
   <div class="pull-right">
     <%= paginate @list %>

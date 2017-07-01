@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170624122256) do
+ActiveRecord::Schema.define(version: 20170630175702) do
 
   create_table "average_caches", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "rater_id"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20170624122256) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "user_id"
+    t.index ["name"], name: "index_lists_on_name", using: :btree
     t.index ["user_id"], name: "index_lists_on_user_id", using: :btree
   end
 
@@ -43,6 +44,7 @@ ActiveRecord::Schema.define(version: 20170624122256) do
     t.datetime "updated_at", null: false
     t.integer  "product_id"
     t.integer  "list_id"
+    t.integer  "quantity"
     t.index ["list_id"], name: "index_product_lists_on_list_id", using: :btree
     t.index ["product_id"], name: "index_product_lists_on_product_id", using: :btree
   end
