@@ -9,23 +9,31 @@
           </div>
           <div class="col-md-6 col-xs-6 price">
             <h3>
-              <label>Min: <%= @sku.price_min %>€<br><small>Max: <%= @sku.price_max %>€</small></label></h3>
+            <label>Min: <%= @sku.price_min %>€<br><small>Max: <%= @sku.price_max %>€</small></label></h3>
           </div>
         </div>
         <p><%= @sku.plain_spec_summary %></p>
         <hr>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-12">
             <div class="add-to-list-form">
-              <%= form_tag controller: :product_lists, class: 'form-inline', :method => :post, action: 'create' do %> 
-                <%= hidden_field_tag "sku_id" , @sku.id %> 
-                <%= select_tag "list", options_from_collection_for_select(@lists, "id", "name"), class: 'form-control' %>
-                <%= number_field_tag "quantity", 1, min: 1, max: 10 %>
-                <%= submit_tag "Add to List", class: 'btn btn-product' %>
+              <%= form_tag controller: :product_lists, class: 'form-inline', :method => :post, action: 'create' do %>
+              <%= hidden_field_tag "sku_id" , @sku.id %>
+                <div class="col-md-6">
+                  <label for="list">List: </label>
+                  <%= select_tag "list", options_from_collection_for_select(@lists, "id", "name"), class: 'form-control' %><br>
+                </div>
+                <div class="col-md-3">
+                  <label for="quantity">Quantity: </label>
+                  <%= number_field_tag "quantity", 1, min: 1, max: 10 , id: "list",   class: "form-control"%><br>
+                </div>
+                <div class="col-md-2">
+                  <%= submit_tag "Add to List", class: 'btn btn-product', style: "margin-top: 25px;" %>
+                </div>
               <% end %>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div> 
+  </div>
