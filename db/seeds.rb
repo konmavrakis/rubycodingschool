@@ -1,11 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db=>seed command (or created alongside the database with db=>setup).
-#
-# Examples=>
-#
-#   movies = Movie.create([{ name=> 'Star Wars' }, { name=> 'Lord of the Rings' }])
-#   Character.create(name=> 'Luke', movie=> movies.first)
-
 FavoriteList.delete_all
 ProductList.delete_all
 List.delete_all
@@ -65,18 +57,28 @@ end
               active: true)
 end
 
-# Add products to lists
+# Create Product Lists
 100.times do
   random_list_id = rand(List.count).next
-  random_sku_key = rand(skus_id.size).next
-
   random_list = List.find_by(name: "List No#{random_list_id}")
-  random_product = Product.find_by(skroutz_id: skus_id[random_sku_key])
+  random_sku_key = rand(skus_id.size).next
+  random_sku_value = skus_id[random_sku_key]
 
-  unless random_list.products.include? random_product
-    random_list.products << random_product
+  product_list = ProductList.find_by(list_id:  random_list.id, sku_id: random_sku_value)
+  unless product_list
+    ProductList.create(list_id: random_list.id, sku_id: random_sku_value, quantity: 1)
+  else
+    product_list.quantity += 1
+    product_list.save
   end
 end
 
-FavoriteList.create(user_id: User.find_by(name: "thanos").id,list_id: List.first.id)
-FavoriteList.create(user_id: User.find_by(name: "thanos").id,list_id: List.second.id)
+# Create Favorite Lists
+User.all.each do |user|
+  rand(7).next.times do
+    random_list_id = rand(List.count).next
+    random_list = List.find_by(name: "List No#{random_list_id}")
+    fav_list = FavoriteList.find_by(list_id: random_list.id, user_id: user.id)
+    FavoriteList.create(list_id: random_list.id, user_id: user.id) if fav_list.nil?
+  end
+end
