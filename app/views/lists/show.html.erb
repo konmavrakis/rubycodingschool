@@ -10,6 +10,7 @@
           Inactive
         <%end%>
       </p>
+      <li><p class="lead"><span class="glyphicon glyphicon glyphicon-shopping-cart"></span> <%= number_with_precision(list_total_price(@sku_list), precision: 2) %>€</p></li>
     </li>
   </ul>
   <%= rating_for @list, 'name', disable_after_rate: false %>
@@ -23,8 +24,11 @@
   <thead>
     <th>Image</th>
     <th>Name</th>
-    <th></th>
+    <th>Price</th>
     <th>Quantity</th>
+    <th>Total price</th>
+    <th></th>
+    <th></th>
   </thead>
 
   <tbody>
@@ -34,11 +38,13 @@
           <img src="<%= sku[:sku].images['main'] %>" class="img-responsive" style="max-height: 60px" alt="<%= sku[:sku].name %>">
         </td>
         <td><%= sku[:sku].name %></td>
-        <td><%= link_to 'Show', products_preview_path(sku: sku[:sku].id), class: 'btn btn-sm btn-primary' %></td>
+        <td><%= sku[:sku].price_min %>€</td>
         <td><%= sku[:quantity] %></td>
-        <td><%= link_to 'remove', product_list_path(sku_id: sku[:sku].id, list_id: @list.id), method: "delete", class: "btn btn-sm btn-primary" %>
+        <td><%= number_with_precision(total_price(sku[:quantity], sku[:sku].price_min), precision: 2) %>€</td>
+        <td><%= link_to 'Show Product', products_preview_path(sku: sku[:sku].id), class: 'btn btn-sm btn-primary' %></td>
+        
         <% if @list.user_id == current_user.id %>
-
+          <td><%= link_to 'remove', product_list_path(sku_id: sku[:sku].id, list_id: @list.id), method: "delete", class: "btn btn-sm btn-primary" %>
         <% end %>
       </tr>
     <% end %>
