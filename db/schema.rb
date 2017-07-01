@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170701092222) do
+ActiveRecord::Schema.define(version: 20170630175702) do
 
   create_table "average_caches", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "rater_id"
@@ -19,6 +19,15 @@ ActiveRecord::Schema.define(version: 20170701092222) do
     t.float    "avg",           limit: 24, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "favorite_lists", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id"
+    t.integer  "list_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["list_id"], name: "index_favorite_lists_on_list_id", using: :btree
+    t.index ["user_id"], name: "index_favorite_lists_on_user_id", using: :btree
   end
 
   create_table "lists", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -97,6 +106,8 @@ ActiveRecord::Schema.define(version: 20170701092222) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "favorite_lists", "lists"
+  add_foreign_key "favorite_lists", "users"
   add_foreign_key "lists", "users"
   add_foreign_key "product_lists", "lists"
   add_foreign_key "product_lists", "products"

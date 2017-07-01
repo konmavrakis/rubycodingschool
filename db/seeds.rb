@@ -6,6 +6,7 @@
 #   movies = Movie.create([{ name=> 'Star Wars' }, { name=> 'Lord of the Rings' }])
 #   Character.create(name=> 'Luke', movie=> movies.first)
 
+FavoriteList.delete_all
 ProductList.delete_all
 List.delete_all
 User.delete_all
@@ -76,3 +77,6 @@ end
     random_list.products << random_product
   end
 end
+
+FavoriteList.create(user_id: User.find_by(name: "thanos").id,list_id: List.first.id)
+FavoriteList.create(user_id: User.find_by(name: "thanos").id,list_id: List.second.id)

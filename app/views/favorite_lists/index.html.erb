@@ -1,0 +1,33 @@
+<ul>
+<% @fav_lists.each do |fav_list|%>
+<% l = fav_list.list %>
+<div class="item  col-xs-4 col-lg-4">
+	<div class="thumbnail orange">
+		<img class="group list-group-image" src="assets/avatar_default_big.png" alt="" />
+		<div class="caption">
+			<h4 class="group inner list-group-item-heading"><%= l.name %></h4>
+				<p class="group inner list-group-item-text">
+					<ul class="list-inline lists">
+						<li><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <%= User.find(l.user_id).name %>
+						</li>
+						<li><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> <%= l.created_at.strftime('%A, %e %B %Y') %></li>
+						</ul>
+				</p>
+				<div class="row">
+					<div class="col-xs-12 col-md-12"> 
+						<%= 
+							if Rate.find_by(rateable_id: l.id)
+								rating_for l, 'name', disable_after_rate: true, avg: true 
+							end
+						%>
+                    <%= link_to "",favorite_list_path(favlist_id = fav_list.id), class: 'btn btn-danger pull-right glyphicon glyphicon-trash',style:'color:white', method: "delete"%>
+                	<a class="btn btn-product pull-right" style="margin-right:10px" href="lists/<%= l.id %>">Show List</a>
+                    
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<%end%>

@@ -14,6 +14,7 @@ class ListsController < ApplicationController
   # GET /lists/1.json
   def show
     @products = @list.product_lists 
+    @favorite_list = FavoriteList.find_by(list_id: @list.id, user_id: current_user.id)
     @sku_list = @products.map do | p | 
       sku = SkroutzApi.find_sku(p.sku_id)
       {sku: sku, quantity: p.quantity}
