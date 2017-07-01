@@ -1,8 +1,9 @@
 class FavoriteListsController < ApplicationController
 
     def index
-      @fav_lists = FavoriteList.joins(:list).includes(:list).where(user_id: current_user.id)
-      # @list = List.where('active=?', true).order('created_at desc').page(params[:page]).per(9)
+      
+      @fav_lists = FavoriteList.joins(:list).includes(:list).where(user_id: current_user.id, :lists => {:active => true})
+      
     end 
 
     def create

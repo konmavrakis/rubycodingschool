@@ -47,6 +47,7 @@ td{
 td.actions,
 td.status {
   width: 100px;
+  text-align: center;
 }
 
 .bs-callout.bs-callout-info {
@@ -94,3 +95,6 @@ h1.intro {
 	text-align: center;	
 }
 
+input#list {
+  border: 1px solid #f58a23;
+}
