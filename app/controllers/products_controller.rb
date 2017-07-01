@@ -26,9 +26,7 @@ class ProductsController < ApplicationController
     unless list.products.include?(product)
       # add to list 
       list.products << product
-    
-      # sku = SkroutzApi.find_sku(sku_id)
-      # να φέρω τη μαμά του; τον μπαμπά του; τον Άγ. Γεράσιμο;  ;;
+
       redirect_to( list , notice: 'WOW! You just added ' + sku_id  + '  to ' + list.name + ' list!'  )
   
     else
