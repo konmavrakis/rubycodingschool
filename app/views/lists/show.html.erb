@@ -11,7 +11,6 @@
         <%end%>
       </p>
     </li>
-    <li><p class="lead"><span class="glyphicon glyphicon glyphicon-shopping-cart"></span> <%= number_with_precision(@total_price, precision: 2) %>€</p></li>
   </ul>
   <%= rating_for @list, 'name', disable_after_rate: false %>
 </div>
@@ -23,23 +22,23 @@
 <table class="table table-stripped">
   <thead>
     <th>Image</th>
-    <th>SKU</th>
     <th>Name</th>
     <th></th>
-    <th></th>
+    <th>Quantity</th>
   </thead>
 
   <tbody>
-    <% @sku.each do |sku| %>
+    <% @sku_list.each do |sku| %>
       <tr>
         <td>
-          <img src="<%= sku.images['main'] %>" class="img-responsive" style="max-height: 60px" alt="<%= sku.name %>">
+          <img src="<%= sku[:sku].images['main'] %>" class="img-responsive" style="max-height: 60px" alt="<%= sku[:sku].name %>">
         </td>
-        <td><%= sku.id %></td>
-        <td><%= sku.name %></td>
-        <td><%= link_to 'Show', products_preview_path(sku: sku.id), class: 'btn btn-sm btn-primary' %></td>
+        <td><%= sku[:sku].name %></td>
+        <td><%= link_to 'Show', products_preview_path(sku: sku[:sku].id), class: 'btn btn-sm btn-primary' %></td>
+        <td><%= sku[:quantity] %></td>
+        <td><%= link_to 'remove', product_list_path(sku_id: sku[:sku].id, list_id: @list.id), method: "delete", class: "btn btn-sm btn-primary" %>
         <% if @list.user_id == current_user.id %>
-          <td><%= link_to 'Remove', list_removeproduct_path(:sku_id=>sku.id, :list_id=>@list.id, :user_id => @list.user_id), method: :put, data: { confirm: 'Really delete this product from your list?' }, class: 'btn btn-sm btn-danger' %></td>
+
         <% end %>
       </tr>
     <% end %>
