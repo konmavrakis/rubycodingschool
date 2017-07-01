@@ -15,6 +15,7 @@ class ListsController < ApplicationController
   def show
     @total_price = 0
     @products = @list.products
+    @favorite_list = FavoriteList.find_by(list_id: @list.id, user_id: current_user.id)
     @sku= Array.new
     @products.each do |product|
       sku_id = product.skroutz_id

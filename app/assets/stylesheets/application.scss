@@ -84,7 +84,13 @@ ul.list-inline.lists{
   color: #f58a23;
 }
 
+.heartlink:hover, .heartlink:active, .heartlink:visited, .heartlink:focus{
+text-decoration: none;
+color:#f58a23;
+
+}
 h1.intro {
 	font-size: 20px;
 	text-align: center;	
 }
+
