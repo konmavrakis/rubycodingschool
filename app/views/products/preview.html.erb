@@ -1,7 +1,9 @@
 <div class="col-sm-10 col-md-10 col-lg-10 col-md-offset-2">
   <div class="col-sm-8 col-md-8 col-lg-8">
     <div class="thumbnail orange">
-      <img src="<%= @sku.images['main'] %>" class="img-responsive" alt="<%= @sku.name %>">
+      <div>
+      	<%= render 'skroutz_carousel' , locals: { account: @sku }%>
+      </div>
       <div class="caption">
         <div class="row">
           <div class="col-md-6 col-xs-6">
