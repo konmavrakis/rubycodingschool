@@ -10,23 +10,23 @@
           Inactive
         <%end%>
       </p>
-      </li>
-      <li><p class="lead"><span class="glyphicon glyphicon glyphicon-shopping-cart"></span> <%= number_with_precision(list_total_price(@sku_list), precision: 2) %>€</p></li>
-    
+    </li>
+    <li><p class="lead"><span class="glyphicon glyphicon glyphicon-shopping-cart"></span> <%= number_with_precision(list_total_price(@sku_list), precision: 2) %>€</p></li>
+
     <li>
       <a href="javascript:;;" 
-              data-list-id="<%=@list.id%>" 
-              <% unless @favorite_list %>
-                data-method="post"  
-                class="glyphicon glyphicon-heart-empty heartlink"
-                data-href="/favorite_lists.json?list_id=<%=@list.id%>"
-              <% else %>
-                data-method="delete"  
-                data-href="/favorite_lists/<%=@favorite_list.id%>.json"
-                class="glyphicon glyphicon-heart heartlink"
-              <% end %>
-              style="font-size: 20px"
-              data-toggle="tooltip" title="Add or remove this list from your Favorites!"></a>
+        data-list-id="<%=@list.id%>" 
+        <% unless @favorite_list %>
+          data-method="post"  
+          class="glyphicon glyphicon-heart-empty heartlink"
+          data-href="/favorite_lists.json?list_id=<%=@list.id%>"
+        <% else %>
+          data-method="delete"  
+          data-href="/favorite_lists/<%=@favorite_list.id%>.json"
+          class="glyphicon glyphicon-heart heartlink"
+        <% end %>
+        style="font-size: 20px"
+        data-toggle="tooltip" title="Add or remove this list from your Favorites!"></a>
     </li>
 
   </ul>
@@ -66,6 +66,8 @@
   <h2>Products</h2>
 </div>
 
+<div id="quantity-notice" class="alert alert-success" style="display:none;"></div>
+
 <table class="table table-stripped">
   <thead>
     <th>Image</th>
@@ -84,7 +86,9 @@
         </td>
         <td><%= link_to sku[:sku].name, products_preview_path(sku: sku[:sku].id) %></td>
         <td><%= sku[:sku].price_min %>€</td>
-        <td><%= sku[:quantity] %></td>
+        <td>
+          <input class="form-control" type="number" id="quantity" value="<%= sku[:quantity] %>" data-method="update" data-listid="<%= @list.id %>" data-skuid="<%= sku[:sku].id %>" style="max-width: 70px;">
+        </td>
         <td><%= number_with_precision(total_price(sku[:quantity], sku[:sku].price_min), precision: 2) %>€</td>
         <% if @list.user_id == current_user.id %>
           <td class="status"><%= link_to '', product_list_path(sku_id: sku[:sku].id, list_id: @list.id), method: "delete", data: { confirm: 'Do you really want to delete this product from your list?' }, class: 'btn btn-md btn-danger glyphicon whiteglyphicon glyphicon glyphicon-trash' %>
@@ -94,14 +98,43 @@
   </tbody>
 </table>
 <script>
-$(document).ready(function(){
+  $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip(); 
+  });
+
+$('#quantity').change(function(){
+  if(this.value > 0 && this.value < 11){
+
+    $('.alert.alert-success').delay(1000).fadeOut('slow');
+    
+    var sku_id = $(this).attr('data-skuid');
+    var list_id = $(this).attr('data-listid');
+    var quantity = this.value;
+
+    $.ajax({
+      method: 'PUT',
+      dataType: 'json',
+      url: '/product_lists/update?' + 'list_id=' + list_id + '&sku_id=' + sku_id + '&quantity=' + quantity,
+      success: function(r) {
+        if (r.resp == 'ok') {
+          $('.alert.alert-success').css('display', 'none');
+          $('#quantity-notice').css('display','block');
+          $('#quantity-notice').html('Quantity of ' + r.name + ' changed to ' + r.quantity + '.')
+          $('#quantity-notice').delay(1000).fadeOut('slow');
+          //handle product total price & list total price updates
+        }
+      }
+    });
+  } else {
+    alert("Enter a value from 1 - 10");
+    $('#quantity').val($(this)[0]['defaultValue']);
+  }
 });
 </script>
 <div class="btn-group">
-<% if @list.user_id == current_user.id %>
-  <%= link_to 'Edit List', edit_list_path(@list), class: 'btn btn-primary' %>
-<% end %>
-<%= link_to 'Back to Your Lists', lists_path, class: 'btn btn-warning' %>
-<%= link_to 'Back to All Lists', root_path, class: 'btn btn-info' %>
+  <% if @list.user_id == current_user.id %>
+    <%= link_to 'Edit List', edit_list_path(@list), class: 'btn btn-primary' %>
+  <% end %>
+  <%= link_to 'Back to Your Lists', lists_path, class: 'btn btn-warning' %>
+  <%= link_to 'Back to All Lists', root_path, class: 'btn btn-info' %>
 </div>
