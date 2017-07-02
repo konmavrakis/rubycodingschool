@@ -23,7 +23,21 @@ class ProductListsController < ApplicationController
     
     ProductList.find_by(sku_id: sku_id, list_id: list.id).delete
     
-    redirect_to( list , notice: 'You just removed ' + SkroutzApi.find_sku(sku_id).name  + '  from ' + list.name + ' list!'  ) 
+    redirect_to( list , notice: 'You just removed ' + SkroutzApi.find_sku(sku_id).name  + '  from ' + list.name + ' list!'  )
+  end
+
+  def update
+    list = List.find(params[:list_id])
+    sku_id = params[:sku_id]
+    quantity = params[:quantity]
+
+    ProductList.find_by(list_id: list.id, sku_id: sku_id).update(quantity: quantity)
+
+    respond_to do |format|   
+      format.html { redirect_to :back, notice: 'List was removed from favorites' }
+      format.json { render json: {resp: 'ok', name: SkroutzApi.find_sku(sku_id).name, quantity: quantity } }          
+    end
+    #redirect_to( list , notice: 'You just change the quantity of ' + SkroutzApi.find_sku(sku_id).name + ' to ' + quantity.to_s + '.')
   end
 
 end
