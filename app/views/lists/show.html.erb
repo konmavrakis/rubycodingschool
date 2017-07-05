@@ -83,7 +83,7 @@
           <img src="<%= sku[:sku].images['main'] %>" class="img-responsive" style="max-height: 60px" alt="<%= sku[:sku].name %>">
         </td>
         <td><%= link_to sku[:sku].name, products_preview_path(sku: sku[:sku].id) %></td>
-        <td><%= sku[:sku].price_min %>€</td>
+        <td><%= number_with_precision(sku[:sku].price_min, precision: 2) %>€</td>
         <td><%= sku[:quantity] %></td>
         <td><%= number_with_precision(total_price(sku[:quantity], sku[:sku].price_min), precision: 2) %>€</td>
         <% if @list.user_id == current_user.id %>
